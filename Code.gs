@@ -1,3 +1,8 @@
+function sortMain(sheet) {
+  var range = sheet.getRange("Acheté!A4:G" + sheet.getLastRow());
+  range.sort(2);
+}
+
 function isCreated(events, title) {
   for (var d = 0 ; d < events.length ; d++) {
     if (events[d].getTitle() == title)
@@ -8,10 +13,10 @@ function isCreated(events, title) {
 
 function main() {
   var sheet = SpreadsheetApp.getActiveSheet();
-  var calendarId = sheet.getRange("C1").getValue();
+  var calendarId = sheet.getRange("ToBuy!C1").getValue();
   var calendar = CalendarApp.getCalendarById(calendarId);
 
-  var data = sheet.getRange("A3:C50").getValues();
+  var data = sheet.getRange("ToBuy!A3:C50").getValues();
   for (var i = 0 ; i < data.length ; i++) {
     if (data[i][2]) {
       var day = new Date(data[i][2]);
@@ -21,6 +26,7 @@ function main() {
       }
     }
   }
+  sortMain(sheet);
 }
 
 function onOpen() {
